@@ -1,0 +1,4 @@
+Minha Primeira Nota	tech	Python
+Minha Segunda Nota	tech	Java
+Minha Tercira Nota	geral	Geral
+Minha Quarta Nota	geral	Anotacoes gerais
