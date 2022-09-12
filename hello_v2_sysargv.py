@@ -27,18 +27,41 @@ __license__ = 'Unlicense'
 
 import os
 import sys
+import logging
+
+# BOILERPLATE
+# TODO: Usar funcao
+# TODO: Usar lib externa (loguru)
+log_level = os.getenv('LOG_LEVEL', 'WARNING').upper()
+log = logging.Logger('logs', log_level) # mostra logs against root logger ex: __name__
+ch = logging.StreamHandler()
+ch.setLevel(log_level)
+fmt = logging.Formatter(
+  '%(asctime)s %(name)s  %(levelname)s l:%(lineno)d f:%(filename)s %(message)s'
+)
+ch.setFormatter(fmt)
+log.addHandler(ch)
 
 print(f'{sys.argv=}') # atente para o =
-arguments = {'lang': None, 'count': 1}
+arguments = {'lang': None, 'count': 10}
 
 for arg in sys.argv[1:]:
-    # TODO: Tratar Value Error
-    key, value = arg.split('=')
+    try:
+        key, value = arg.split('=')
+    except ValueError as e:
+        log.error(
+            "You need to use `=`, you passed %s, try --key=value: %s",
+            arg,
+            str(e)
+        )
+        sys.exit(1)
     key = key.lstrip('-').strip()
     value = value.strip()
+
+    # validaçao
     if key not in arguments:
-        print(f'Invalid Option {key}')
-        sys.exit()
+        print(f'Invalid Option `{key}`')
+        sys.exit(1)
     arguments[key] = value
 
 current_language = arguments['lang']
