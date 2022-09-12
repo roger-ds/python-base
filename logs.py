@@ -9,21 +9,14 @@ import logging
 
 # nossa instancia
 log = logging.Logger('logs.py', logging.DEBUG)
-
 #level
 ch = logging.StreamHandler()
-
 
 logging.critical('Erro geral ex: banco de dados sumiu')
 logging.error('Erro que afeta uma unica execucao')
 logging.warning('Aviso que nao causa erro')
 logging.info('Mensagem geral para usuarios')
 logging.debug('Mensagem pro dev, qe, sysadmin')
-
-print('-' * 50)
-
-logging.debug('Mensagem pro dev, qe, sysadmin')
-logging.info('Mensagem geral para usuarios')
 
 print('-' * 50) 
 
