@@ -1,19 +1,24 @@
 #!/usr/bin/env/ python3
 import os
 import logging  # root logger
+from logging import handlers
 
 # BOILERPLATE
 # TODO: Usar funcao
 # TODO: Usar lib externa (loguru)
 log_level = os.getenv('LOG_LEVEL', 'WARNING').upper()
 log = logging.Logger('logs', log_level) # mostra logs against root logger ex: __name__
-ch = logging.StreamHandler()
-ch.setLevel(log_level)
+fh = handlers.RotatingFileHandler(
+  'meulog.log',
+  maxBytes=300, #10**6
+  backupCount=5
+  )
+fh.setLevel(log_level)
 fmt = logging.Formatter(
   '%(asctime)s %(name)s  %(levelname)s l:%(lineno)d f:%(filename)s %(message)s'
 )
-ch.setFormatter(fmt)
-log.addHandler(ch)
+fh.setFormatter(fmt)
+log.addHandler(fh)
 
 """
 log.critical('Erro geral ex: banco de dados sumiu')
