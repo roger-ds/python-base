@@ -23,8 +23,6 @@ log.info('Mensagem geral para usuarios')
 log.debug('Mensagem pro dev, qe, sysadmin')
 """
 
-print('-' * 50)
-
 try:
   1 / 0
 except ZeroDivisionError as e:
