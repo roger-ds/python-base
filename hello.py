@@ -40,4 +40,3 @@ print(msg)
 
 print(current_language)
 
-# commit concluido

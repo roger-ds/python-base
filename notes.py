@@ -31,7 +31,7 @@ if arguments[0] not in cmds:
     print(f'Invalid command {arguments[0]}')
 
 if arguments[0] == 'read':
-    # leitura das notas
+    # leitura das notas\
     for line in open(filepath):
         title, tag, text = line.split('\t')
         if tag.lower() == arguments[1].lower():
