@@ -16,25 +16,28 @@ import logging
 
 log = logging.Logger('alerta')
 
-info = {
-    'temperatura': None,
-    'umidade': None
-}
-keys = info.keys()
+info = {'temperatura': None, 'umidade': None}
 
-for key in keys:
-    
-    try:
-        info[key] = float(input(f'Qual a {key} atual ? ').strip())
-    except ValueError: 
-        log.error(f'{key.capitalize()} invalida')
-        sys.exit(1)
+while True:
+    # condicao de parada
+    # o dicionario está completamente preenchido
+    info_size = len(info.values())
+    filled_size = len([value for value in info.values() if value is not None])
+    if info_size == filled_size:
+        break
 
-temp = info['temperatura']
-umidade = info['umidade']
+    keys = info.keys()
+    for key in keys:
+        try:
+            info[key] = float(input(f'Qual a {key} atual ? ').strip())
+        except ValueError: 
+            log.error(f'{key.capitalize()} invalida')
+            sys.exit(1)
+    temp = info['temperatura']
+    umidade = info['umidade']
 
-if temp <= 0: print('Frio extremo') 
-elif temp > 0 and temp <= 10: print('Frio')
-elif temp > 10 and temp <= 30: print('Normal')
-elif temp > 45: print('Calor extremo')
-elif temp * 3 >= umidade: print('ALERTA!!! Perigo de calor úmido')
+    if temp <= 0: print('Frio extremo') 
+    elif temp > 0 and temp <= 10: print('Frio')
+    elif temp > 10 and temp <= 30: print('Normal')
+    elif temp > 45: print('Calor extremo')
+    elif temp * 3 >= umidade: print('ALERTA!!! Perigo de calor úmido')
